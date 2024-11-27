@@ -6,42 +6,81 @@ printf \- formatted output conversion
 .sp
 .B int printf(const char *format, ...);
 .SH DESCRIPTION
-The \fBprintf\fR function prints formatted output to stdout. The format string can contain ordinary characters and format specifiers (preceded by '%'). The function takes a variable number of arguments corresponding to the format specifiers.
+The \fBprintf\fR function produces output according to a format string, which may contain format specifiers. It is part of the C standard library defined in <stdio.h>. It allows for formatted printing of strings, integers, floating point numbers, and other data types.
 
-Supported format specifiers include:
+The format string may contain ordinary characters, which are copied directly to the output, and format specifiers, which are replaced by the corresponding argument in the list.
+
+The format specifiers must be of the form '%', followed by an optional flag, width, precision, length modifier, and a conversion character. The conversion character determines how the argument will be formatted.
+
+.SH PARAMETERS
+The function takes a variable number of arguments, with the first being a constant string format:
+
 .TP
-.B %d
-Prints an integer (decimal).
-.TP
-.B %c
+.B format
+A constant character string that specifies how the remaining arguments are formatted. The format string can include:
+.RS
+.IP "\%d" or "\%i"
+Prints an integer in decimal.
+.IP "\%c"
 Prints a single character.
-.TP
-.B %s
-Prints a string.
-.TP
-.B %f
+.IP "\%s"
+Prints a string of characters.
+.IP "\%f"
 Prints a floating-point number.
+.IP "\%x" or "\%X"
+Prints an integer in hexadecimal (lowercase/uppercase).
+.IP "\%o"
+Prints an integer in octal.
+.IP "\%p"
+Prints a pointer address.
+.RE
+
 .TP
-.B %x
-Prints an integer in hexadecimal.
+.B ... (variable arguments)
+A list of values corresponding to the format specifiers in the format string. The arguments are processed in the order they appear in the format string.
 
 .SH RETURN VALUE
-Returns the number of characters printed, excluding the null byte, or -1 on error.
+The function returns the total number of characters written to the output, excluding the terminating null byte.
+
+If an error occurs, \fBprintf\fR returns a negative value, typically -1.
+
+.SH ERRORS
+The \fBprintf\fR function may fail if:
+- A conversion specifier is incorrect or unsupported.
+- Memory allocation fails during output formatting.
+- There are invalid or mismatched argument types.
 
 .SH EXAMPLES
-.nf
-  int num = 42;
-  printf("Number: %d\n", num);
-.fi
-Output:
-  Number: 42
 
+.TP
+Example 1: Printing an integer
 .nf
-  printf("Hello, %s!\n", "world");
+  int n = 42;
+  printf("The number is %d\n", n);
 .fi
 Output:
-  Hello, world!
+  The number is 42
+
+.TP
+Example 2: Printing a string
+.nf
+  char *str = "Hello, world!";
+  printf("Message: %s\n", str);
+.fi
+Output:
+  Message: Hello, world!
+
+.TP
+Example 3: Printing a float
+.nf
+  double pi = 3.14159;
+  printf("Pi value: %.2f\n", pi);
+.fi
+Output:
+  Pi value: 3.14
 
 .SH SEE ALSO
-.BR printf (1), 
-.BR sprintf (3)
+.BR sprintf (3),
+.BR snprintf (3),
+.BR vprintf (3)
+
