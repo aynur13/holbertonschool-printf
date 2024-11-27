@@ -34,7 +34,7 @@ This code will print the following output to the stdout stream:
 .SH AUTHOR:
 aynur13 - Aynur Musayeva
 .br
-DaryaJavadiasl - Darya Javadiasl
+Daryajavadiasl - Darya Javadli
 .br
 .SH SEE ALSO:
 official printf function: man (1) printf" > _printf.1
